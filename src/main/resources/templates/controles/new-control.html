@@ -1,0 +1,236 @@
+<div class="row">
+    <!-- left column  centrar  col-md-offset-3-->
+    <div class="col-md-12">
+        <!-- general form elements -->
+        <!-- form start -->
+        <form data-toggle="validator" th:id="${form}" role="form">
+            <div class="box-body">
+            	<div class="row">
+                    <div class="col-md-12">
+		                <div class="form-group">
+		                    <label>Nombre</label>
+		                    <input type="text" class="form-control" id="txtNameControl" name="nombre"
+		                           th:value="${control?.nombre}" placeholder="Ingrese un nombre" maxlength="255" required>
+		                    <div class="help-block with-errors"></div>
+		                </div>
+		            </div>
+                   
+                </div>
+                    
+                <div class="row">
+					<div class="col-md-12">
+						<div class="form-group">
+							<label>Descripción</label>
+							<textarea class="form-control" rows="3" id="txtDescripcion"
+								name="descripcion" placeholder="Ingrese una Descripción"
+								th:text="${control?.descripcion}" required></textarea>
+							<div class="help-block with-errors"></div>
+						</div>
+					</div>
+				</div>
+				
+				<div class="row">
+					 <div class="col-md-12">
+                        <div class="form-group">
+							<label>Calificar diseño del control</label> 
+							<input type="text" class="form-control" id="txtresultadoDisenoControl" name="resultadoDisenoControl"
+		                           th:value="${control?.resultadoDisenoControl}"  maxlength="255"  readonly>
+                            <div class="help-block with-errors"></div>
+                        </div>
+                    </div>
+				</div>
+				
+                <hr>
+                <label>Criterios</label>  
+                    
+                <div class="row">   
+                   <div class="col-md-6">
+                       <div class="form-group">
+                           <label>Tipo de control</label>
+                           <select id="cboTipoControl" class="form-control" name="tipoControlId" onchange="changeResultado()" required>
+                               <option value="">Seleccione</option>
+                               <option th:each="e :${tipoControlList}" th:selected="${e.id==control?.tipoControlId}" th:value="${e.id}" th:attr="data-peso=${e.peso}, data-porcentaje=${e.porcentaje}">
+                                   [(${e.nombre +' - '+#strings.replace(e.porcentaje, '.00', '')+'%'})]
+                               </option>
+                           </select>
+                           <div class="help-block with-errors"></div>
+                       </div>
+                   </div>
+                   <div class="col-md-6">
+                       <div class="form-group">
+                           <label>Tipo de ejecución</label>
+                           <select id="cboTipoEjecucion" class="form-control" name="tipoEjecucionId"  onchange="changeResultado()" required>
+                               <option value="">Seleccione</option>
+                               <option th:each="e :${tipoEjecucionList}" th:selected="${e.id==control?.tipoEjecucionId}" th:value="${e.id}" th:attr="data-peso=${e.peso}, data-porcentaje=${e.porcentaje}">
+                                   [(${e.nombre +' - '+#strings.replace(e.porcentaje, '.00', '')+'%'})]
+                               </option>
+                           </select>
+                           <div class="help-block with-errors"></div>
+                       </div>
+                   </div>
+                </div>
+				
+				<div class="row">   
+                   <div class="col-md-6">
+                       <div class="form-group">
+                           <label>¿Se ejecuta con alguna frecuencia?</label>
+                           <select id="cboFrecuenciaEjecucion" class="form-control" name="frecuenciaEjecucionId" onchange="changeResultado()" required>
+                               <option value="">Seleccione</option>
+                               <option th:each="e :${frecuenciaEjecucionList}" th:selected="${e.id==control?.frecuenciaEjecucionId}" th:value="${e.id}" th:attr="data-peso=${e.peso}, data-porcentaje=${e.porcentaje}">
+                                   [(${e.nombre +' - '+#strings.replace(e.porcentaje, '.00', '')+'%'})]
+                               </option>
+                           </select>
+                           <div class="help-block with-errors"></div>
+                       </div>
+                   </div>
+                   <div class="col-md-6">
+                       <div class="form-group">
+                           <label>¿Está documentado?</label>
+                           <select id="cboEstadoDocumentacion" class="form-control" name="estadoDocumentacionId" onchange="changeResultado()" required>
+                               <option value="">Seleccione</option>
+                               <option th:each="e :${estadoDocumentacionList}" th:selected="${e.id==control?.estadoDocumentacionId}" th:value="${e.id}" th:attr="data-peso=${e.peso}, data-porcentaje=${e.porcentaje}">
+                                   [(${e.nombre +' - '+#strings.replace(e.porcentaje, '.00', '')+'%'})]
+                               </option>
+                           </select>
+                           <div class="help-block with-errors"></div>
+                       </div>
+                   </div>
+                </div>
+				
+				<div class="row">   
+                   <div class="col-md-6">
+                       <div class="form-group">
+                           <label>¿Tiene evidencia?</label>
+                           <select id="cboEstadoEvidencia" class="form-control" name="estadoEvidenciaId" onchange="changeResultado()" required>
+                               <option value="">Seleccione</option>
+                               <option th:each="e :${estadoEvidenciaList}" th:selected="${e.id==control?.estadoEvidenciaId}" th:value="${e.id}" th:attr="data-peso=${e.peso}, data-porcentaje=${e.porcentaje}">
+                                   [(${e.nombre +' - '+#strings.replace(e.porcentaje, '.00', '')+'%'})]
+                               </option>
+                           </select>
+                           <div class="help-block with-errors"></div>
+                       </div>
+                   </div>
+                   <div class="col-md-6">
+                       <div class="form-group">
+                           <label>¿Tiene responsable asociado?</label>
+                           <select id="cboEstadoResponsable" class="form-control" name="estadoResponsableId" required onchange="viewResponsable();changeResultado()">
+                               <option value="">Seleccione</option>
+                               <option th:each="e :${estadoResponsableList}" th:selected="${e.id==control?.estadoResponsableId}" th:value="${e.id}" th:attr="data-peso=${e.peso}, data-porcentaje=${e.porcentaje}">
+                                   [(${e.nombre +' - '+#strings.replace(e.porcentaje, '.00', '')+'%'})]
+                               </option>
+                           </select>
+                           <div class="help-block with-errors"></div>
+                       </div>
+                   </div>
+                </div>
+                
+                <hr>
+                
+                <div class="row">
+					<div class="col-md-12">
+                        <div class="form-group">
+							<label>Calificar ejecución de control</label> 
+							<input type="text" class="form-control" id="txtResultadoEjecucionControl" name="resultadoEjecucionControl"
+		                           th:value="${control?.resultadoEjecucionControl}"  maxlength="255"  readonly>
+                            <div class="help-block with-errors"></div>
+                        </div>
+                    </div>
+				</div>
+                
+                <hr>
+                <label>Criterios</label>  
+                
+                <div class="row">   
+                   <div class="col-md-6">
+                       <div class="form-group">
+                           <label>¿Se han presentados eventos?</label>
+                           <select id="cboEstadoEvento" class="form-control" name="estadoEventoId" onchange="changeResultado()" required>
+                               <option value="">Seleccione</option>
+                               <option th:each="e :${estadoEventoList}" th:selected="${e.id==control?.estadoEventoId}" th:value="${e.id}" th:attr="data-peso=${e.peso}, data-porcentaje=${e.porcentaje}">
+                                   [(${e.nombre +' - '+#strings.replace(e.porcentaje, '.00', '')+'%'})]
+                               </option>
+                           </select>
+                           <div class="help-block with-errors"></div>
+                       </div>
+                   </div>
+                   <div class="col-md-6">
+                       <div class="form-group">
+                           <label>¿El diseño de control es efectivo?</label>
+                           <select id="cboEstadoEfectividad" class="form-control" name="estadoEfectividadId" onchange="changeResultado()" required>
+                               <option value="">Seleccione</option>
+                               <option th:each="e :${estadoEfectividadList}" th:selected="${e.id==control?.estadoEfectividadId}" th:value="${e.id}" th:attr="data-peso=${e.peso}, data-porcentaje=${e.porcentaje}">
+                                   [(${e.nombre +' - '+#strings.replace(e.porcentaje, '.00', '')+'%'})]
+                               </option>
+                           </select>
+                           <div class="help-block with-errors"></div>
+                       </div>
+                   </div>
+                </div>
+				<div class="row">
+					<div class="col-md-6">
+                       <div class="form-group">
+                           <label>¿La evidencia es efectiva?</label>
+                           <select id="cboEstadoEvidencia2" class="form-control" name="estadoEvidencia2Id" onchange="changeResultado()" required>
+                               <option value="">Seleccione</option>
+                               <option th:each="e :${estadoEvidencia2List}" th:selected="${e.id==control?.estadoEvidencia2Id}" th:value="${e.id}" th:attr="data-peso=${e.peso}, data-porcentaje=${e.porcentaje}">
+                                   [(${e.nombre +' - '+#strings.replace(e.porcentaje, '.00', '')+'%'})]
+                               </option>
+                           </select>
+                           <div class="help-block with-errors"></div>
+                       </div>
+                   </div>
+					<div class="col-md-6" id="responsableDiv" style="display:none">
+						<div class="form-group">
+							<label for="cboResponsables">Responsable</label> 
+							<select
+								id="cboResponsables" class="form-control" name="usuarioId"
+								>
+								<option value="">Seleccione</option>
+								<option th:each="p :${responsables}"
+									th:selected="${p.id==control?.usuarioId}" th:value="${p.id}">[(${p.nombreCompleto})]
+								</option>
+							</select>
+							<div class="help-block with-errors"></div>
+						</div>
+					</div>
+				</div>
+			
+				<div class="row">
+					<div class="col-md-12"> 
+						<div class="form-group">
+							<label>Asignar riesgos:</label> 
+							<select multiple id="listRiesgos" th:attr="data-ids=${control?.riesgos}"  class="form-control" name="riesgos[]">
+								 <option th:each="e :${riesgoList}" th:value="${e.id}">
+                                    [(${e.id +' - '+e.nombre})]
+                                </option>
+							</select>
+						</div>
+					</div>
+				</div>
+				
+				<hr>
+				
+				<div class="row">
+					<div class="col-md-12">
+                        <div class="form-group">
+							<label>Calificación final</label> 
+							<input type="text" class="form-control" id="txtResultadoControl" name="resultadoControl"
+		                           th:value="${control?.resultadoControl}"  maxlength="255" required readonly>
+                            <div class="help-block with-errors"></div>
+                        </div>
+                    </div>
+				</div>
+
+
+			</div><!-- /.box-body -->
+			<input type="hidden" name="id" th:value="${control?.id}" readonly/>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" id="btnClose">Close</button>
+                <button type="submit" class="btn btn-success"  th:if="${nameBtn}" th:text="${nameBtn}">Crear</button>
+            </div>
+        </form>
+        <div id="msjmntControl"></div>
+        <!-- right column -->
+    </div>   <!-- /.row -->
+</div>
+

@@ -1,0 +1,147 @@
+<div class="row">
+  <!-- left column  centrar  col-md-offset-3-->
+  <div class="col-md-12">
+    <!-- general form elements -->
+    <!-- form start -->
+    <form data-toggle="validator" th:id="${formPlan}" role="form">
+      <div class="box-header with-border" style="border-bottom: 1px solid #00a65a;">
+        <h3 class="box-title" >Informacion General</h3>
+      </div>
+      <div class="box-body">
+        <div class="form-group">
+          <label for="txtNameColegio">Nombre</label>
+          <input type="text" class="form-control" id="txtNameColegio" name="nombre"
+                 th:value="${planAccion?.nombre}" placeholder="Ingrese un nombre" required>
+          <div class="help-block with-errors"></div>
+        </div>
+        <div class="form-group">
+          <label for="txtNameColegio">Descripción</label>
+          <textarea class="form-control" rows="3" id="txtDescripcion" name="descripcion" placeholder="Ingrese una Descripción"
+                    th:text="${planAccion?.descripcion}" required ></textarea>
+          <div class="help-block with-errors"></div>
+        </div>
+        <div class="row" >
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>Fecha de inicio</label>
+              <div class="input-group">
+                <div class="input-group-addon">
+                  <i class="fa fa-clock-o"></i>
+                </div>
+                <input type="text" class="form-control pull-right" id="fechaInicio" name="fechaInicio"
+                       th:value="${#temporals.format(planAccion?.fechaInicio,'dd/MM/yyyy')}">
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>Fecha de finalizacion</label>
+              <div class="input-group">
+                <div class="input-group-addon">
+                  <i class="fa fa-clock-o"></i>
+                </div>
+                <input type="text" class="form-control pull-right" id="fechaFin" name="fechaFin"
+                       th:value="${#temporals.format(planAccion?.fechaFin,'dd/MM/yyyy')}">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row" >
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="cboResponsables">Responsable del plan de accion</label>
+              <select id="cboResponsables" class="form-control" name="usuarioId" required>
+                <option value="">Seleccione</option>
+                <option th:each="p :${responsables}" th:selected="${p.id==planAccion?.usuarioId}"
+                        th:value="${p.id}">[(${p.nombreCompleto})]
+                </option>
+              </select>
+              <div class="help-block with-errors"></div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="cboEstados">Estado del plan de accion</label>
+              <select id="cboEstados" class="form-control" name="estadoId" required>
+                <option value="">Seleccione</option>
+                <option th:each="p :${estadoList}" th:selected="${p.id==planAccion?.estadoId}"
+                        th:value="${p.id}">[(${p.nombre})]
+                </option>
+              </select>
+              <div class="help-block with-errors"></div>
+            </div>
+          </div>
+      </div>
+      <div class="box-header with-border" style="border-bottom: 1px solid #00a65a;">
+          <h3 class="box-title" >Riesgo</h3>
+      </div>
+      <div class="row">
+					<div class="col-md-12"> 
+						<div class="form-group">
+        <div class="form-group">
+          <label>Asignar riesgos:</label>
+          <select multiple id="listRiesgos" th:attr="data-ids=${planAccion?.riesgos}" data-ids="1,2" class="form-control" name="riesgos[]">
+            <option th:each="e :${riesgoList}" th:value="${e.id}">
+              [(${e.id +' - '+e.nombre})]
+            </option>
+          </select>
+        </div>
+     </div>
+	</div>
+	</div>
+      <div class="box-header with-border" style="border-bottom: 1px solid #00a65a;">
+        <h3 class="box-title" >Actividades de plan</h3>
+      </div>
+      <div class="box-body">
+        <div class="mailbox-controls">
+          <!-- Check all button -->
+
+          <!--<button class="btn btn-default btn-sm checkbox-toggle">Add</button>-->
+          <!--                     <a id="addRow" class="btn btn-default btn-sm checkbox-toggle" data-toggle="modal">Add</a> -->
+        </div>
+        <table id="tblActividades" class="table table-bordered table-striped">
+          <thead>
+
+          <tr>
+            <th>Descripcion</th>
+            <th>Estado</th>
+            <th>Delete</th>
+          </tr>
+          </thead>
+          <div th:if="${not #lists.isEmpty(planAccion?.actividades)}">
+          <tbody>
+            <tr th:each="actividad, iStat : ${planAccion.actividades}">
+              <td>
+                <div class="form-group" style="display: flex;">
+                  <input type="text" style="width:100%"  data-error="*" class="form-control input-sm" name="actividades[][descripcion]"
+                         th:value="${actividad?.descripcion}" required>
+                  <div class="help-block with-errors"></div>
+                </div>
+              </td>
+              <td><div class="form-group" style="display: flex;">
+                <select id="cboEstado" class="form-control " data-error="*" name="actividades[][estadoId]" required>
+                  <option value="">Seleccione</option>
+                  <option value="19" th:selected="${actividad?.estadoId==19}" >No finalizado</option>
+                  <option value="20" th:selected="${actividad?.estadoId==20}" >Finalizado</option>
+                  </select><div class="help-block with-errors"></div>
+                </div></td>
+              <td>
+                <button type="button" class="btn btn-danger btn-sm btnDeleteItem"><span class="glyphicon glyphicon-trash"></span></button>
+              </td>
+            </tr>
+          </tbody>
+          </div>
+        </table>
+        <div id="msjtblActividades" style="color:#a94442;" class="help-block with-errors"></div>
+
+      </div>
+      <input type="hidden" name="id" th:value="${planAccion?.id}" readonly/>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" id="btnClose">Close</button>
+        <button type="submit" class="btn btn-success" th:if="${nameBtn}" th:text="${nameBtn}"></button>
+      </div>
+    </form>
+    <div id="msjformplan"></div>
+    <!-- right column -->
+  </div>   <!-- /.row -->
+</div>

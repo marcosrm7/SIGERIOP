@@ -1,0 +1,139 @@
+<div class="row">
+    <!-- left column  centrar  col-md-offset-3-->
+    <div class="col-md-12">
+        <!-- general form elements -->
+        <!-- form start -->
+        <form data-toggle="validator" th:id="${formEvento}" role="form">
+            <div class="box-body">
+                <div class="form-group">
+                    <label for="txtNameColegio">Nombre</label>
+                    <input type="text" class="form-control" id="txtNameColegio" name="nombre"
+                           th:value="${evento?.nombre}" placeholder="Ingrese un nombre" required>
+                    <div class="help-block with-errors"></div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="cboTiposevento">Tipo</label>
+                            <select id="cboTiposevento" class="form-control" name="tipoCategoriaId" required>
+                                <option value="">Seleccione</option>
+                                <option th:each="p :${tiposevento}" th:selected="${p.id==evento?.eventoTipoCategoriaId}"
+                                        th:value="${p.id}">[(${p.nombre})]
+                                </option>
+                            </select>
+                            <div class="help-block with-errors"></div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="cboCategoriasevento">Categoria</label>
+                            <select id="cboCategoriasevento" class="form-control" name="tipoeventoId" required>
+                                <option value="">Seleccione</option>
+                                <option th:each="p :${categoriaseventoList}" th:selected="${p.id==evento?.tipoeventoId}" th:value="${p.id}">
+                                    [(${p.nombre})]
+                                </option>
+                            </select>
+                            <div class="help-block with-errors"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="txtNameColegio">Descripción</label>
+                    <textarea class="form-control" rows="3" id="txtDescripcion" name="descripcion" placeholder="Ingrese una Descripción"
+                              th:text="${evento?.descripcion}" required ></textarea>
+                    <div class="help-block with-errors"></div>
+                </div>
+                <div class="form-group">
+                    <label for="cboResponsables">Responsable</label>
+                    <select id="cboResponsables" class="form-control" name="usuarioId" required>
+                        <option value="">Seleccione</option>
+                        <option th:each="p :${responsables}" th:selected="${p.id==evento?.usuarioId}"
+                                th:value="${p.id}">[(${p.nombreCompleto})]
+                        </option>
+                    </select>
+                    <div class="help-block with-errors"></div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="cbogeneraPerdida">¿Este evento genera pérdida?</label>
+                            <select id="cbogeneraPerdida" class="form-control" name="generaPerdida" required>
+                                <option value="">Seleccione</option>
+                                <option th:selected="${evento?.generaPerdida}==si" value="si">Si</option>
+                                <option th:selected="${evento?.generaPerdida}==no" value="no">No</option>
+                            </select>
+                            <div class="help-block with-errors"></div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="txtNameColegio">Perdida ($)</label>
+                            <input type="text" class="form-control" id="txtmontoPerdida" name="montoPerdida"
+                                   th:value="${evento?.montoPerdida}"  required>
+                            <div class="help-block with-errors"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="cbocriticidad">¿Este evento genera pérdida?</label>
+                    <select id="cbocriticidad" class="form-control" name="criticidadId" required>
+                        <option value="">Seleccione</option>
+                        <option th:each="c :${criticidadList}" th:selected="${c.id==evento?.criticidadId}"
+                                th:value="${c.id}">[(${c.nombre})]
+                        </option>
+                    </select>
+                    <div class="help-block with-errors"></div>
+                </div>
+                <div class="form-group">
+                    <label for="txtNameColegio">¿Dónde ocurrió el evento?</label>
+                    <input type="text" class="form-control" id="txtLugar" name="lugar"
+                           th:value="${evento?.lugar}" placeholder="Ingrese un lugar" required>
+                    <div class="help-block with-errors"></div>
+                </div>
+                <div class="form-group">
+                    <label>Inicio del evento</label>
+                    <p class="text-success" >
+                        <i class="fa fa-info-circle"></i> Momento en el que se materializo el evento.
+                    </p>
+                    <div class="input-group">
+                        <div class="input-group-addon">
+                            <i class="fa fa-clock-o"></i>
+                        </div>
+                        <input type="text" class="form-control pull-right" id="fechaInicioEvento" name="fechaInicioEvento"
+                        	 th:value="${#temporals.format(evento?.fechaInicioEvento,'dd/MM/yyyy HH:mm')}">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Descubrimiento del evento</label>
+                    <p class="text-success" >
+                        <i class="fa fa-info-circle"></i> Momento en el que se percató del evento.
+                    </p>
+                    <div class="input-group">
+                        <div class="input-group-addon">
+                            <i class="fa fa-clock-o"></i>
+                        </div>
+                        <input type="text" class="form-control pull-right" id="fechaDescubrimientoEvento" name="fechaDescubrimientoEvento"
+                            th:value="${#temporals.format(evento?.fechaDescubrimientoEvento,'dd/MM/yyyy HH:mm')}">
+                    </div>
+                </div>
+                <hr>
+                <div class="form-group">
+                    <label>Procesos:</label>
+                    <select id="listprocesos"  class="form-control" name="procesoId" th:attr="data-ids=${evento?.procesoId}">
+                        <option th:each="e :${procesoList}" th:value="${e.id}" th:selected="${e.id==evento?.procesoId}">
+                            [(${e.nombre})]
+                        </option>
+                    </select>
+                </div>
+            </div><!-- /.box-body -->
+            <input type="hidden" name="id" th:value="${evento?.id}" readonly/>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" id="btnClose">Close</button>
+                <button type="submit" class="btn btn-success" th:if="${nameBtn}" th:text="${nameBtn}">Crear</button>
+            </div>
+        </form>
+        <div id="msjformevento"></div>
+        <!-- right column -->
+    </div>   <!-- /.row -->
+</div>

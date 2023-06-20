@@ -1,0 +1,151 @@
+
+
+
+.panel-default > .panel-heading-custom {
+    background: rgb(0, 191, 255);
+     color: #fff; 
+     font-family: Arial, Helvetica, sans-serif;
+     font-weight: 700;
+     padding-top: 2.5px;
+     padding-bottom: 2.5px;
+     padding-left: 3.5px;
+}
+.panel-default > .panel-heading-custom2 {
+    background: rgb(0, 0, 0);
+     color: #fff; 
+     font-family: Arial, Helvetica, sans-serif;
+     font-weight: 700;
+     padding-top: 2.5px;
+     padding-bottom: 2.5px;
+     padding-left: 3.5px;
+}
+.panel-default > .panel-heading-custom3 {
+    background: rgb(235, 137, 95);
+     color: #fff; 
+     font-family: Arial, Helvetica, sans-serif;
+     font-weight: 700;
+     padding-top: 2.5px;
+     padding-bottom: 2.5px;
+     padding-left: 3.5px;
+}
+.panel-default > .panel-heading-custom4 {
+    background: rgb(220, 179, 4);
+     color: #fff; 
+     font-family: Arial, Helvetica, sans-serif;
+     font-weight: 700;
+     padding-top: 2.5px;
+     padding-bottom: 2.5px;
+     padding-left: 3.5px;
+}
+
+.pageGroup{
+    margin-top: -10px;
+    float:right
+}
+.pageBtn{
+    padding: 2px;
+    font-weight: 750;
+}
+
+
+.btnGroup{
+   text-align: center;
+   margin-top: -5px;
+}
+.yearBtn{
+    width: 13.3%;
+    text-align: center;
+    margin-left: 1px;
+    margin-right: 1px;
+    margin-top: 5px;
+    background-color: #fff;
+}
+
+.firstColumn{
+    padding-left: 0px;
+    padding-right: 15px;
+}
+.secondColumn{
+    padding-right: 15px;
+    padding-left: 0px;
+}
+
+
+.customDivider{
+    margin-bottom: 10px;
+}
+
+.noteBtn{
+    width: 23.75%;
+    text-align: center;
+    margin-top: 5px;
+    margin-left: 1px;
+    margin-right: 1px;
+    background-color: #fff;
+    
+}
+.gradoBtn{
+    width: 47%;
+    text-align: center;
+    margin-top: 5px;
+    margin-left: 4px;
+    margin-right: 4px;
+    background-color: #fff;
+    
+}
+
+.pieChart{
+    margin-top: -15px;
+    margin-bottom: -15px;
+   
+}
+table {
+    width: 100%;
+    text-align: left;
+    border-collapse: collapse;
+    margin: 0 0 1em 0;
+    caption-side: top;
+ }
+ caption, td, th {
+    padding: 0.3em;
+ }
+ tbody {
+    border-top: 1px solid #000;
+    border-bottom: 1px solid #000;
+ }
+ tbody th, tfoot th {
+    border: 0;
+ }
+ th.name {
+    width: 25%;
+ }
+ th.location {
+    width: 20%;
+ }
+ th.lasteruption {
+    width: 30%;
+ }
+ th.eruptiontype {
+    width: 25%;
+ }
+ tfoot {
+    text-align: center;
+    color: #555;
+    font-size: 0.8em;
+ }
+
+.scroll-div{
+    height:135px;
+    overflow: hidden;
+    overflow-y:scroll;
+    padding-top: 5px;
+}
+
+.downCustom{
+    margin-top: 10px;
+}
+
+.customyearLect{
+    
+    height: 475px;
+}

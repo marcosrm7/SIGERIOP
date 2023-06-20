@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:th="http://www.thymeleaf.org" 
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
+	layout:decorate="~{layout/main-panel}">
+
+<div layout:fragment="page_content" id="page_content">
+<div class="row">
+		<div class="col-md-12">
+			<div class="box box-widget">
+				<!-- Small boxes (Stat box) -->
+				<div class="">
+					<div id="effect-a-12" class="col-sm-12 invoice-col" style="animation-duration: 0.4s; animation-timing-function: linear;">
+						<label style="font-size: 16px; font-weight: bold; color: #066DAB;">BIENVENIDOS A SIGERIOP</label>
+						<p class="text-justify">
+							Como entidad del sector financiero, sabes lo importante que es identificar, evaluar y mitigar los riesgos operacionales que enfrentas en tu día a día. Es por eso que hemos desarrollado un sistema web de gestión de riesgos operacionales especialmente diseñado para ayudarte a proteger la estabilidad financiera de tu empresa. Con nuestra plataforma, podrás tener una visión clara y precisa de tus riesgos operacionales, tomar decisiones informadas y estratégicas para minimizar su impacto y cumplir con los requisitos regulatorios de tu industria. Además, nuestro sistema ofrece una gestión integral de los riesgos, permitiéndote monitorearlos constantemente y tomar medidas preventivas y correctivas oportunamente. ¡Asegura la estabilidad financiera de tu empresa con nuestra gestión de riesgos operacionales!
+						</p>
+					</div>
+				</div>
+				<div class="box-body">
+					<div id="content"
+						style="display: inline-block; width: 100%; text-align: center;">
+						<img style="height: 100%; width: 100%; vertical-align: top;" th:src="@{/dist/img/logo-home-sigeriope2.png}" alt="Photo">
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

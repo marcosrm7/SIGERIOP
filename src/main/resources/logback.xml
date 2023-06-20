@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE xml>
+<configuration>
+    <include resource="org/springframework/boot/logging/logback/base.xml"/>
+
+    <!--WINDOWS -->
+<!--         <property name="PATH" value="C:/educasnik/Publico/Logs"/> -->
+    <!--LINUX -->
+        	<property name="PATH" value="/var/log/sigeriope"/>
+
+        <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+            <encoder>
+                <charset>UTF-8</charset>
+                <pattern>%d{dd/MM/yyyy HH:mm:ss.SSS}[%18.18thread][%2.-3level{10}][%30.30logger{50}] %msg%n</pattern>
+            </encoder>
+        </appender>
+
+        <appender name="FILE_LOG" class="ch.qos.logback.core.rolling.RollingFileAppender">
+            <file>${PATH}/admin.log</file>
+            <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+                <charset>UTF-8</charset>
+                <pattern>%d{dd/MM/yyyy HH:mm:ss.SSS}[%10.10thread][%2.-3level{10}][%30.30logger{50}] %msg%n</pattern>
+            </encoder>
+            <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+                <fileNamePattern>${PATH}/web.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+                <timeBasedFileNamingAndTriggeringPolicy
+                        class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                    <maxFileSize>15MB</maxFileSize>
+                </timeBasedFileNamingAndTriggeringPolicy>
+                <maxHistory>30</maxHistory>
+            </rollingPolicy>
+        </appender>
+
+        <logger name="com.edu.pe.sigeriope" level="DEBUG" additivity="false">
+            <appender-ref ref="FILE_LOG"/>
+            <appender-ref ref="STDOUT"/>
+        </logger>
+
+        <logger name="org.springframework.jdbc" level="ERROR" additivity="false">
+            <appender-ref ref="FILE_LOG"/>
+            <appender-ref ref="STDOUT"/>
+        </logger>
+        
+    </configuration>
+

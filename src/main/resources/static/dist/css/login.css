@@ -1,0 +1,25 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 14/05/2017, 06:34:27 PM
+    Author     : developer
+*/
+
+.widget-login-logo {
+    margin-top: 15px;
+    margin-bottom: 15px;
+    text-align: center;
+    font-weight: 400; }
+.widget-login-logo .fa-circle {
+    font-size: 13px;
+    margin: 0 20px; }
+
+ .login-footer {
+  margin-top: 15px;
+  margin-bottom: 30px;
+  font-size: 13px;
+  color: #999999;
+  text-align: center; }

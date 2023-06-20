@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/main-panel}">
+<div layout:fragment="page_content" id="page_content">
+    <div class="row">
+        <!-- left column  centrar  col-md-offset-3-->
+        <div class="col-md-12">
+            <!-- general form elements -->
+            <div class="box box-success">
+                <div class="box-header with-border">
+                    <!-- Link trigger modal -->
+                    <a th:href="@{/procesos/view/add}" data-toggle="modal" data-target="#myModalViewProceso" data-remote="false" class="btn btn-success">
+                        Crear Proceso
+                    </a>
+                </div>
+                <!-- /.box-header -->
+                <!-- form start -->
+
+                <!--<div id="msjregusu" > </div>-->
+            </div>
+            <!-- /.box -->
+        </div>
+        <!--/.col (left) -->
+        <!-- right column -->
+    </div>
+    <!-- /.row -->
+
+    <!-- Default bootstrap modal example -->
+    <div class="modal fade" id="myModalViewProceso" tabindex="-1"
+         role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header modal-header-success" >
+                    <button type="button" class="close" data-dismiss="modal"
+                            aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title" id="modal-title"></h4>
+                </div>
+                <div class="modal-body" id="modal-body"></div>
+                <!--<div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-primary">Save changes</button>
+                </div>-->
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box">
+                <div class="box-header">
+                    <h3 class="box-title">Lista de Procesos</h3>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <table id="tbProcesos" class="table table-bordered table-striped">
+                        <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Nombre del proceso</th>
+                            <th>Tipo</th>
+                            <th>Categoria</th>
+                            <th>Acciones</th>
+                        </tr>
+                        </thead>
+<!--                        <tfoot>
+                        <tr>
+                            <th>Codigo</th>
+                            <th>Nombre del proceso</th>
+                            <th>Tipo</th>
+                            <th>Categoria</th>
+                            <th>Acciones</th>
+                        </tr>
+                        </tfoot>-->
+                    </table>
+                </div>
+                <!-- /.box-body -->
+            </div>
+            <!-- /.box -->
+        </div>
+    </div>
+</div>
+<th:block layout:fragment="script_module">
+    <script th:src="@{/dist/js/procesos/procesos.js}" charset="utf-8"></script>
+</th:block>

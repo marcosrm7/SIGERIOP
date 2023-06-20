@@ -1,0 +1,328 @@
+
+
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css"
+	th:href="@{classpath:static/bootstrap/css/bootstrap.min.css}">
+<!-- Font Awesome -->
+<link rel="stylesheet"
+	th:href="@{classpath:static/bootstrap/css/font-awesome.min.css}">
+<!-- Ionicons -->
+<link rel="stylesheet"
+	th:href="@{classpath:static/bootstrap/css/ionicons.min.css}">
+</head>
+<body>
+	<h2 style="text-align: center;">Reporte</h2>
+	
+	<div class="col-md-12">
+		<div class="box">
+			<div class="box-header">
+				<h3 class="box-title"> <strong><i class="fa fa-list"/> Proceso</strong></h3>
+			</div>
+			<div class="box-body no-padding">
+				<div class="row">
+					<div class="col-md-6">
+						<label><strong>Proceso involucrado </strong></label> <label
+							class="form-control" th:text=" ${obj.procesoNombre}"></label>
+					</div>
+					<div class="col-md-6" style="height: auto;">
+						<label><strong>Descripción del proceso</strong></label>
+						<label class="form-control" style="height:auto" th:text=" ${obj.procesoDescripcion}"></label>
+					</div>
+					<div class="col-md-6">
+						<label><strong>Categoria del proceso</strong></label> <label
+							class="form-control" th:text=" ${obj.procesoCategoria}"></label>
+					</div>
+					<div class="col-md-6">
+						<label><strong>Tipo de proceso</strong></label> <label
+							class="form-control" th:text=" ${obj.procesoTipo}"></label>
+					</div>
+					<div class="col-md-6">
+						<label><strong>Responsable del proceso</strong></label> <label
+							class="form-control" th:text=" ${obj.responsable}"></label>
+					</div>
+					<div class="col-md-6">
+						<label><strong>Área involucrada en el proceso</strong></label> <label
+							class="form-control" th:text=" ${obj.areaNombre}"></label>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<hr/>
+	
+	<div class="col-md-12">
+		<div class="box">
+			<div class="box-header">
+				<h3 class="box-title"> <strong><i class="fa fa-exclamation-circle"/> Riesgo</strong></h3>
+			</div>
+			<div class="box-body no-padding">
+				<div class="box-body no-padding">
+
+
+					<div class="row">
+						<div class="col-md-6">
+							<label><strong>Nombre de Riesgo</strong></label> <label
+								class="form-control" th:text=" ${obj.riesgoNombre}"></label>
+						</div>
+						<div class="col-md-6">
+							<label><strong>Descripcion de Riesgo</strong></label>
+							<label style="height: auto"
+								   class="form-control" th:text=" ${obj.riesgoDescripcion}"></label>
+						</div>
+					</div>
+					<br/>
+			
+				<table class="table table-bordered table-striped" style="text-align:center">
+					<tr>
+						<th style="text-align:center">Detalle de Riesgo</th>
+						<th style="text-align:center">Progreso</th>
+						<th style="text-align:center">Resultado %</th>
+						<th style="text-align:center">Rango</th>
+					</tr>
+					<tr>
+						<td>Impacto de Riesgo</td>
+						<td><div class="progress progress-xs">
+								<div class="progress-bar"
+									th:classappend="${obj.impactoRiesgoPorcentaje >= 70 ? 'progress-bar-danger': (obj.impactoRiesgoPorcentaje >= 25 )?'progress-bar-yellow':'progress-bar-success'}"
+									th:style="'width: '+${obj.impactoRiesgoPorcentaje}+'%'"></div>
+							</div></td>
+						<td><strong><label class="label  "  
+							th:classappend="${obj.impactoRiesgoPorcentaje >= 70 ? 'label-danger': (obj.impactoRiesgoPorcentaje >= 25)?'label-primary':'label-success'}"
+							th:text=" ${obj.impactoRiesgoPorcentaje+'%'}"></label></strong></td>
+						<td><strong><label class="label" 
+							th:classappend="${obj.impactoRiesgoPorcentaje >= 70 ? 'label-danger': (obj.impactoRiesgoPorcentaje >= 25)?'label-primary':'label-success'}"
+							th:text=" ${obj.impactoRiesgo}">55%</label></strong></td>
+					</tr>
+					<tr>
+						<td>Frecuencia de Riesgo</td>
+						<td><div class="progress progress-xs">
+								<div class="progress-bar"
+									th:classappend="${obj.frecuenciaRiesgoPorcentaje >= 70 ? 'progress-bar-danger': (obj.frecuenciaRiesgoPorcentaje >= 25)?'progress-bar-yellow':'progress-bar-success'}"
+									th:style="'width: '+${obj.frecuenciaRiesgoPorcentaje}+'%'"></div>
+							</div></td>
+						<td><strong><label class="label " 
+							th:classappend="${obj.frecuenciaRiesgoPorcentaje >= 70 ? 'label-danger': (obj.frecuenciaRiesgoPorcentaje >= 25)?'label-primary':'label-success'}"
+							th:text=" ${obj.frecuenciaRiesgoPorcentaje+'%'}"></label></strong></td>
+						<td><strong><label class="label"  
+							th:classappend="${obj.frecuenciaRiesgoPorcentaje >= 70 ? 'label-danger': (obj.frecuenciaRiesgoPorcentaje >= 25)?'label-primary':'label-success'}"
+							th:text=" ${obj.frecuenciaRiesgo}">55%</label></strong></td>
+					</tr>
+					<tr>
+						<td>Nivel de Riesgo</td>
+						<td><div class="progress progress-xs">
+								<div class="progress-bar"
+									th:classappend="${obj.nivelRiesgo == 'bajo' ? 'progress-bar-danger': (obj.nivelRiesgo == 'medio')?'progress-bar-yellow':'progress-bar-success'}"
+									th:style="'width: '+${obj.nivelRiesgoPorcentaje*100}+'%'"></div>
+							</div>
+						</td>
+						<td><strong><label class="label "  style="text-align:center"
+							th:classappend="${obj.nivelRiesgo == 'bajo' ? 'label-danger': (obj.nivelRiesgo == 'medio')?'label-primary':'label-success'}"
+							th:text=" ${obj.nivelRiesgoPorcentaje*100+'%'}"></label></strong>
+						</td>
+						<td><strong><label class="label"  style="text-align:center"
+							th:classappend="${obj.nivelRiesgo == 'bajo' ? 'label-danger': (obj.nivelRiesgo == 'medio')?'label-primary':'label-success'}"
+							th:text=" ${obj.nivelRiesgo}">55%</label></strong>
+						</td>
+					</tr>
+				</table>
+				
+				<div th:if="${obj.causaList}">
+					<h4 class="box-title"> <strong> Causas del riesgo</strong></h3>
+					<table class="table table-bordered table-striped" style="text-align:center">
+						<tr>
+							<th style="text-align:center">Causa</th>
+							<th style="text-align:center">Descripción</th>
+						</tr>
+						<tr  th:each="e :${obj.causaList}">
+							<td th:text="${e.nombre}">Consecuencia</td>
+							<td th:text="${e.descripcion}">Descripcion</td>
+							
+						</tr>
+					</table> 
+				</div>
+				
+				<div th:if="${obj.consecuenciaList}">
+					<h4 class="box-title"> <strong> Consecuencias del riesgo</strong></h3>
+					<table class="table table-bordered table-striped" style="text-align:center">
+						<tr>
+							<th style="text-align:center">Consecuencia</th>
+							<th style="text-align:center">Descripción</th>
+						</tr>
+						<tr  th:each="e :${obj.consecuenciaList}">
+							<td th:text="${e.nombre}">Consecuencia</td>
+							<td th:text="${e.descripcion}">Descripción</td>
+							
+						</tr>
+					</table> 
+				</div>
+				 
+			</div>
+		</div>
+	</div>
+	
+	<br/>
+	<hr/>
+	
+	<div class="col-md-12">
+		<div class="box">
+			<div class="box-header">
+				<h3 class="box-title"> <strong><i class="fa fa-sliders"/> Controles</strong></h3>
+			</div>
+			<!-- /.box-header -->
+			<div class="box-body no-padding">
+
+
+				<div class="row">
+					<div class="col-md-6">
+						<label><strong>Nombre de control asignado</strong></label> <label
+							class="form-control" th:text=" ${obj.controlNombre}"></label>
+					</div>
+					<div class="col-md-6">
+						<label><strong>Descripcion de control asignado</strong></label>
+						<label style="height: auto"
+							class="form-control" th:text=" ${obj.controlDescripcion}"></label>
+					</div>
+					<div class="col-md-6">
+						<label><strong>Tipo de control</strong></label> <label
+							class="form-control" th:text=" ${obj.tipoControl}"></label>
+					</div>
+					<div class="col-md-6">
+						<label><strong>Tipo de ejecución</strong></label> <label
+							class="form-control" th:text=" ${obj.tipoEjecucion}"></label>
+					</div>
+				</div>
+				<br/>
+				<table class="table table-bordered table-striped" style="text-align:center">
+					<tr>
+						<th style="text-align:center">Actividad de Control</th>
+						<th style="text-align:center">Progreso</th>
+						<th style="text-align:center">Resultado %</th>
+						<th style="text-align:center">Rango</th>
+					</tr>
+					<tr>
+						<td>Diseño de Control</td>
+						<td><div class="progress progress-xs">
+								<div class="progress-bar"
+									th:classappend="${obj.resultaDisenoControl == 'bajo' ? 'progress-bar-danger': (obj.resultaDisenoControl == 'medio')?'progress-bar-yellow':'progress-bar-success'}"
+									th:style="'width: '+${obj.resultaDisenoControlPorcentaje}+'%'"></div>
+							</div></td>
+						<td><strong><label class="label  "  
+							th:classappend="${obj.resultaDisenoControl == 'bajo' ? 'label-danger': (obj.resultaDisenoControl == 'medio')?'label-primary':'label-success'}"
+							th:text=" ${obj.resultaDisenoControlPorcentaje+'%'}"></label></strong></td>
+						<td><strong><label class="label" 
+							th:classappend="${obj.resultaDisenoControl == 'bajo' ? 'label-danger': (obj.resultaDisenoControl == 'medio')?'label-primary':'label-success'}"
+							th:text=" ${obj.resultaDisenoControl}">55%</label></strong></td>
+					</tr>
+					<tr>
+						<td>Ejecución de Control</td>
+						<td><div class="progress progress-xs">
+								<div class="progress-bar"
+									th:classappend="${obj.resultadoEjecucionControl == 'bajo' ? 'progress-bar-danger': (obj.resultadoEjecucionControl == 'medio')?'progress-bar-yellow':'progress-bar-success'}"
+									th:style="'width: '+${obj.resultadoEjecucionControlPorcentaje}+'%'"></div>
+							</div></td>
+						<td><strong><label class="label " 
+							th:classappend="${obj.resultadoEjecucionControl == 'bajo' ? 'label-danger': (obj.resultadoEjecucionControl == 'medio')?'label-primary':'label-success'}"
+							th:text=" ${obj.resultadoEjecucionControlPorcentaje+'%'}"></label></strong></td>
+						<td><strong><label class="label"  
+							th:classappend="${obj.resultadoEjecucionControl == 'bajo' ? 'label-danger': (obj.resultadoEjecucionControl == 'medio')?'label-primary':'label-success'}"
+							th:text=" ${obj.resultadoEjecucionControl}">55%</label></strong></td>
+					</tr>
+					<tr>
+						<td>Resultado de Control</td>
+						<td><div class="progress progress-xs">
+								<div class="progress-bar"
+									th:classappend="${obj.resultadoControl == 'bajo' ? 'progress-bar-danger': (obj.resultadoControl == 'medio')?'progress-bar-yellow':'progress-bar-success'}"
+									th:style="'width: '+${obj.resultadoControlPorcentaje}+'%'"></div>
+							</div></td>
+						<td><strong><label class="label "  style="text-align:center"
+							th:classappend="${obj.resultadoControl == 'bajo' ? 'label-danger': (obj.resultadoControl == 'medio')?'label-primary':'label-success'}"
+							th:text=" ${obj.resultadoControlPorcentaje+'%'}"></label></strong></td>
+						<td><strong><label class="label"  style="text-align:center"
+							th:classappend="${obj.resultadoControl == 'bajo' ? 'label-danger': (obj.resultadoControl == 'medio')?'label-primary':'label-success'}"
+							th:text=" ${obj.resultadoControl}">55%</label></strong></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+	</div>
+	<br/>
+	<hr/>
+	<div class="col-md-12">
+		<div class="box">
+			<div class="box-header">
+				<h3 class="box-title"> <strong><i class="fa fa-calendar"/> Evento</strong></h3>
+			</div>
+			<div class="box-body no-padding">
+				<div class="row">
+					<div class="col-md-6">
+						<label><strong>Nombre del evento</strong></label> <label
+							class="form-control" th:text=" ${obj.eventoNombre}"></label>
+					</div>
+					<div class="col-md-6">
+						<label><strong>Descripción del evento</strong></label> <label
+							class="form-control" th:text=" ${obj.eventoDescripcion}"></label>
+					</div>
+					<div class="col-md-6">
+						<label><strong>Tipo de evento</strong></label> <label
+							class="form-control" th:text=" ${obj.tipoEvento}"></label>
+					</div>
+					<div class="col-md-6">
+						<label><strong>Fecha de inicio del evento</strong></label> <label
+							class="form-control" th:text=" ${obj.eventoFechaInicio}"></label>
+					</div>
+					<div class="col-md-6" th:if="${obj.montoPerdida}!=''">
+						<label><strong>Monto perdida estimada</strong></label> <label
+							class="form-control" th:text=" ${obj.montoPerdida}"></label>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<br/>
+	<hr/>
+	
+	<div class="col-md-12">
+		<div class="box">
+			<div class="box-header">
+				<h3 class="box-title"> <strong><i class="fa fa-pencil-square-o"/> Plan de Acción</strong></h3>
+			</div>
+			<!-- /.box-header -->
+			<div class="box-body no-padding">
+
+
+				<div class="row">
+					<div class="col-md-6">
+						<label><strong>Nombre del plan de acción asignado</strong></label> <label
+							class="form-control" th:text=" ${obj.planNombre}"></label>
+					</div>
+					<div class="col-md-6">
+						<label><strong>Descripción del plan de acción</strong></label> <label
+							class="form-control" th:text=" ${obj.planDescripcion}"></label>
+					</div>
+				</div>
+				<br/>
+				<div th:if="${obj.actividadesPlanList}">
+					<h4 class="box-title"> <strong> Actividades del plan de acción</strong></h4>
+					<table class="table table-bordered table-striped" style="text-align:center">
+						<tr>
+							<th style="text-align:center">Actividad</th>
+							<th style="text-align:center">Estado</th>
+						</tr>
+						<tr  th:each="e :${obj.actividadesPlanList}">
+							<td th:text="${e.descripcion}">Actividad</td>
+							<td th:text="${e.estado}">Estado</td>
+							
+						</tr>
+					</table> 
+				</div>
+			</div>
+		</div>
+	</div>
+	
+
+</body>
+</html>

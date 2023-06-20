@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/main-panel}">
+<div layout:fragment="page_content" id="page_content">
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box box-success">
+                <div class="box-header with-border">
+                   Total de registros
+                </div>
+                <div class="box-body">
+                    <div class="col-md-3  col-sm-6 col-xs-12">
+                        <div class="info-box">
+                            <span class="info-box-icon bg-gray-light"><i class="fa fa-align-right"></i></span>
+                            <div class="info-box-content">
+                                <span class="info-box-text">Procesos</span>
+                                <span class="info-box-number" th:text="${proceso}">0</span>
+                            </div><!-- /.info-box-content -->
+                        </div><!-- /.info-box -->
+                    </div><!-- /.col -->
+                    <div class="col-md-3 col-sm-6 col-xs-12">
+                        <div class="info-box">
+                            <span class="info-box-icon bg-gray-light"><i class="fa fa-exclamation-circle"></i></span>
+                            <div class="info-box-content">
+                                <span class="info-box-text" >Riesgos</span>
+                                <span class="info-box-number" th:text="${riesgo}">0</span>
+                            </div><!-- /.info-box-content -->
+                        </div><!-- /.info-box -->
+                    </div><!-- /.col -->
+
+                    <!-- fix for small devices only -->
+                    <div class="clearfix visible-sm-block"></div>
+
+                    <div class="col-md-3 col-sm-6 col-xs-12">
+                        <div class="info-box">
+                            <span class="info-box-icon bg-gray-light"><i class="fa fa-sliders"></i></span>
+                            <div class="info-box-content">
+                                <span class="info-box-text" >Controles</span>
+                                <span class="info-box-number" th:text="${control}">0</span>
+                            </div><!-- /.info-box-content -->
+                        </div><!-- /.info-box -->
+                    </div><!-- /.col -->
+                    <div class="col-md-3 col-sm-6 col-xs-12">
+                        <div class="info-box">
+                            <span class="info-box-icon bg-gray-light"><i class="fa fa-calendar"></i></span>
+                            <div class="info-box-content">
+                                <span class="info-box-text" >Eventos</span>
+                                <span class="info-box-number" th:text="${evento}">0</span>
+                            </div><!-- /.info-box-content -->
+                        </div><!-- /.info-box -->
+                    </div><!-- /.col -->
+                    <div class="col-md-3 col-md-offset-4 col-sm-6 col-xs-12">
+                        <div class="info-box">
+                            <span class="info-box-icon bg-gray-light"><i class="fa fa-pencil-square-o"></i></span>
+                            <div class="info-box-content">
+                                <span class="info-box-text">Planes de acción</span>
+                                <span class="info-box-number" th:text="${plan}">0</span>
+                            </div><!-- /.info-box-content -->
+                        </div><!-- /.info-box -->
+                    </div><!-- /.col -->
+                </div>
+            </div>
+        </div>
+    </div><!-- /.row -->
+</div>
+<th:block layout:fragment="script_module">
+    <script th:src="@{/dist/js/dashboard/dashboard.js}" charset="utf-8"></script>
+</th:block>

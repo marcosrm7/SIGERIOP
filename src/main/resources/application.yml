@@ -1,0 +1,28 @@
+# -----------------------
+# PUERTO
+# -----------------------
+server:
+   port: 8082
+   servlet:
+      context-path: /sigeriop
+      #aplica cuando el server es integrado
+      session.tracking-modes: cookie
+   error.whitelabel.enabled: false
+
+# -----------------------
+# POSTGRESQL DATABASE CONFIGURATION
+# -----------------------
+spring:
+   datasource:
+      driver-class-name: org.postgresql.Driver
+      url: jdbc:postgresql://postgres-1.cqb1qsaxloly.us-east-1.rds.amazonaws.com/gestionriesgo2022
+      username: postgres
+      password: g35t10nr135g02022
+      
+# THYMELEAF (ThymeleafAutoConfiguration)
+# Enable template caching.   
+   thymeleaf:
+      templateResolverOrder: 1
+      cache: false
+      mode: LEGACYHTML5
+      encoding: UTF-8

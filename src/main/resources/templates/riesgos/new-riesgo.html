@@ -1,0 +1,216 @@
+<div class="row">
+    <!-- left column  centrar  col-md-offset-3-->
+    <div class="col-md-12">
+        <!-- general form elements -->
+        <!-- form start -->
+        <form data-toggle="validator" th:id="${formRiesgo}" role="form">
+            <div class="box-body">
+                <div class="form-group">
+                    <label for="txtNameColegio">Nombre</label>
+                    <input type="text" class="form-control" id="txtNameRiesgo" name="nombre"
+                           th:value="${riesgo?.nombre}" placeholder="Ingrese un nombre" maxlength="255" required>
+                    <div class="help-block with-errors"></div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+							<label for="cboImpactoProceso">Impacto del riesgo
+								<button type="button" class="btn btn-info btn-xs"
+									data-toggle="tooltip" data-placement="right"
+									title="Consecuencias que origina la materialización del riesgo.">
+									<i class="fa fa-info-circle" />
+								</button>
+							</label> 
+							<select id="cboImpactoProceso" class="form-control" name="impactoRiesgoId" required>
+                                <option value="">Seleccione</option>
+                                <option th:each="iR :${impactoRiesgoList}" th:selected="${iR.id==riesgo?.impactoRiesgoId}"
+                                        th:value="${iR.id}">[(${iR.nombre+' - '+#strings.replace(iR.porcentaje, '.00', '')+'%'})]
+                                </option>
+                            </select>
+                            <div class="help-block with-errors"></div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="cboFrecuenciaRiesgo">Calificar frecuencia del riesgo
+                            	<button type="button" class="btn btn-info btn-xs"
+									data-toggle="tooltip" data-placement="right"
+									title="Probabilidad de que se materialice el riesgo.">
+									<i class="fa fa-info-circle" />
+								</button>
+                            </label>
+                            <select id="cboFrecuenciaRiesgo" class="form-control" name="frecuenciaRiesgoId" required>
+                                <option value="">Seleccione</option>
+                                <option th:each="fR :${frecuenciaRiesgoList}" th:selected="${fR.id==riesgo?.frecuenciaRiesgoId}" th:value="${fR.id}">
+                                    [(${fR.nombre +' - '+#strings.replace(fR.porcentaje, '.00', '')+'%'})]
+                                </option>
+                            </select>
+                            <div class="help-block with-errors"></div>
+                        </div>
+                    </div>
+                </div>
+				<div class="row">
+					<div class="col-md-12">
+						<div class="form-group">
+							<label for="txtNameColegio">Descripción</label>
+							<textarea class="form-control" rows="3" id="txtDescripcion"
+								name="descripcion" placeholder="Ingrese una Descripción"
+								th:text="${riesgo?.descripcion}" required></textarea>
+							<div class="help-block with-errors"></div>
+						</div>
+					</div>
+				</div>
+				<hr>
+				<div class="row">
+					<div class="col-md-6">
+						<div class="form-group">
+							<label for="cboResponsables">Responsable</label> 
+							<select
+								id="cboResponsables" class="form-control" name="usuarioId"
+								required>
+								<option value="">Seleccione</option>
+								<option th:each="p :${responsables}"
+									th:selected="${p.id==riesgo?.usuarioId}" th:value="${p.id}">[(${p.nombreCompleto})]
+								</option>
+							</select>
+							<div class="help-block with-errors"></div>
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="form-group">
+							<label for="cboResponsables">¿Este riesgo afecta la continuidad de tu negocio?</label> 
+								<div class="radio">
+									<label> <input type="radio" id="afectaNegocioSi" name="afectaNegocio" value="Si" class="flat-red" th:checked="${riesgo?.afectaNegocio}==Si" required> Si  </label>
+									<label> <input type="radio" id="afectaNegocioNo" name="afectaNegocio" value="No" class="flat-red" th:checked="${riesgo?.afectaNegocio}==No" required> No  </label>
+								</div>
+							<div class="help-block with-errors"></div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					
+					<hr/>
+					<div class="box-header with-border" style="border-bottom: 1px solid #00a65a;">
+				        <h3 class="box-title" >Causas</h3>
+				      </div>
+				      <div class="box-body">
+				        <div class="mailbox-controls">
+				        </div>
+				        <table id="tblCausa" class="table table-bordered table-striped">
+				          <thead>
+				          <tr>
+				          	<th>Tipo de causa</th>
+				            <th>Descripcion</th>
+				            <th>Delete</th>
+				          </tr>
+				          </thead>
+				          <tbody>
+				            <tr th:each="e, iStat : ${riesgo?.causas}">
+				              
+				              <td>
+				              	<div class="form-group" style="display: flex;">
+					                  <select id="cboCausa" class="form-control" 
+					                  	name="causas[][tipoCausaId]" required>
+										<option value="">Seleccione</option>
+										<option th:each="p :${causaList}"
+											th:selected="${p.id==e?.tipoCausaId}" th:value="${p.id}">[(${p.nombre})]
+										</option>
+									</select>
+				                  
+				                  <div class="help-block with-errors"></div>
+				                </div>
+				              </td>
+				              <td>
+				                <div class="form-group" style="display: flex;">
+				                  <input type="text" style="width:100%"  data-error="*" class="form-control input-sm" 
+				                    name="causas[][descripcion]"  th:value="${e?.descripcion}" required>
+				                  <div class="help-block with-errors"></div>
+				                </div>
+				              </td>
+				              <td>
+				                <button type="button" class="btn btn-danger btn-sm btnDeleteItem"><span class="glyphicon glyphicon-trash"></span></button>
+				              </td>
+				            </tr>
+				          </tbody>
+				        </table>
+				        <div id="msjtblCausa" style="color:#a94442;" class="help-block with-errors"></div>
+				
+				      </div>
+				      
+				      <hr/>
+					<div class="box-header with-border" style="border-bottom: 1px solid #00a65a;">
+				        <h3 class="box-title" >Consecuencia</h3>
+				      </div>
+				      <div class="box-body">
+				        <div class="mailbox-controls">
+				        </div>
+				        <table id="tblConsecuencia" class="table table-bordered table-striped">
+				          <thead>
+				          <tr>
+				          	<th>Tipo de consecuencia</th>
+				            <th>Descripcion</th>
+				            <th>Delete</th>
+				          </tr>
+				          </thead>
+				          
+				          <tbody>
+				            <tr th:each="e, iStat : ${riesgo?.consecuencias}">
+				              
+				              <td>
+				              	<div class="form-group" style="display: flex;">
+					                  <select id="cboConsecuencia" class="form-control" 
+					                  	name="consecuencias[][tipoConsecuenciaId]" required>
+										<option value="">Seleccione</option>
+										<option th:each="p :${consecuenciaList}"
+											th:selected="${p.id==e?.tipoConsecuenciaId}" th:value="${p.id}">[(${p.nombre})]
+										</option>
+									</select>
+				                  
+				                  <div class="help-block with-errors"></div>
+				                </div>
+				              </td>
+				              <td>
+				                <div class="form-group" style="display: flex;">
+				                  <input type="text" style="width:100%"  data-error="*" class="form-control input-sm" 
+				                    name="consecuencias[][descripcion]"  th:value="${e?.descripcion}" required>
+				                  <div class="help-block with-errors"></div>
+				                </div>
+				              </td>
+				              <td>
+				               <button type="button" class="btn btn-danger btn-sm btnDeleteItem1"><span class="glyphicon glyphicon-trash"></span></button>
+				              </td>
+				            </tr>
+				          </tbody>
+				          
+				        </table>
+				        <div id="msjtblConsecuencia" style="color:#a94442;" class="help-block with-errors"></div>
+				      </div>
+					</div>
+					
+					<hr/>
+				
+				<div class="row">
+					<div class="col-md-12"> 
+						<div class="form-group">
+							<label>Procesos:</label> 
+							<select multiple id="listprocesos" th:attr="data-ids=${riesgo?.procesos}" class="form-control" name="procesos[]">
+								 <option th:each="e :${procesoList}" th:value="${e.id}">
+                                    [(${e.id +' - '+e.nombre})]
+                                </option>
+							</select>
+						</div>
+					</div>
+				</div>
+
+
+			</div><!-- /.box-body -->
+			<input type="hidden" name="id" th:value="${riesgo?.id}" readonly/>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" id="btnClose">Close</button>
+                <button type="submit" class="btn btn-success" th:if="${nameBtn}" th:text="${nameBtn}">Crear</button>
+            </div>
+        </form>
+        <div id="msjmntRiesgo"></div>
+        <!-- right column -->
+    </div>   <!-- /.row -->
+</div>
